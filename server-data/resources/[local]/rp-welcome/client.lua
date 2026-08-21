@@ -1,0 +1,17 @@
+RegisterNetEvent('rp-welcome:client:showRules', function(rulesText)
+    local ped = PlayerPedId()
+    FreezeEntityPosition(ped, true)
+    SetNuiFocus(true, true)
+    SendNUIMessage({ action = 'show', rules = rulesText })
+end)
+
+RegisterNUICallback('acceptRules', function(_, cb)
+    SetNuiFocus(false, false)
+    FreezeEntityPosition(PlayerPedId(), false)
+    TriggerServerEvent('rp-welcome:server:rulesAccepted')
+    cb('ok')
+end)
+
+CreateThread(function()
+    TriggerServerEvent('rp-welcome:server:requestRules')
+end)

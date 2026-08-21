@@ -17,6 +17,9 @@ cache/
 server-data/cache/
 server-data/resources/*/cache/
 
+# Sauvegardes de la base de données
+backups/
+
 # Divers OS/éditeurs
 .DS_Store
 *.swp

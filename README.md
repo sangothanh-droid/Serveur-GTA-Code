@@ -12,6 +12,11 @@ framework [QBCore](https://github.com/qbcore-framework).
 | `docker-compose.yml`        | Base de données MariaDB + Adminer                            |
 | `.env.example`               | Modèle des variables d'environnement (à copier en `.env`)   |
 | `setup.sh`                   | Télécharge FXServer et clone les ressources QBCore           |
+| `server-data/resources/[local]/rp-queue`    | File d'attente FIFO (avec priorité staff) quand le serveur est plein |
+| `server-data/resources/[local]/rp-welcome`  | Écran de règlement à l'arrivée + logs Discord (join/leave)   |
+| `deploy/install-service.sh` | Installe le serveur comme service systemd (auto-restart)     |
+| `deploy/firewall.sh`         | Configure UFW (ports 22, 30120, 40120 uniquement)             |
+| `deploy/backup-db.sh`        | Sauvegarde + rotation de la base de données                   |
 | `docs/INSTALL.md`            | Guide d'installation pas à pas                                |
 
 ## Démarrage rapide
@@ -20,7 +25,8 @@ framework [QBCore](https://github.com/qbcore-framework).
 cp .env.example .env       # puis remplir les valeurs
 docker compose up -d       # démarre la base de données
 ./setup.sh                 # installe FXServer + QBCore
-cd fxserver && ./run.sh +exec ../server-data/server.cfg
+./deploy/firewall.sh       # ouvre les ports nécessaires
+./deploy/install-service.sh # démarre le serveur en service (auto-restart)
 ```
 
 Voir [`docs/INSTALL.md`](docs/INSTALL.md) pour le guide détaillé (licence

@@ -58,6 +58,47 @@
    (`connect <ip>:30120`), ou lister le serveur publiquement dans le
    navigateur de serveurs FiveM (activé par défaut, pas de whitelist).
 
+## File d'attente et écran de règlement
+
+Deux ressources maison sont incluses dans `server-data/resources/[local]/` et
+déjà activées dans `server.cfg` :
+
+- **`rp-queue`** — file d'attente FIFO quand le serveur est plein (utile en
+  accès libre puisqu'il n'y a pas de whitelist pour limiter l'affluence).
+  Éditer `Config.PriorityIdentifiers` dans `server.lua` pour faire passer le
+  staff devant (identifiants au format `license:xxxxxxxx`).
+- **`rp-welcome`** — écran de règlement affiché à la connexion (le joueur est
+  figé tant qu'il n'a pas cliqué sur « J'accepte »), avec logs Discord des
+  connexions/déconnexions et acceptations du règlement. Configurer l'URL du
+  webhook dans `server.cfg` via `setr rp_welcome_discord_webhook "..."`, et
+  adapter le texte des règles dans `resources/[local]/rp-welcome/server.lua`.
+
+## Déploiement en service (redémarrage automatique)
+
+```bash
+./deploy/install-service.sh        # installe et démarre le service systemd "gta-rp"
+journalctl -u gta-rp -f            # suivre les logs en direct
+```
+
+Le service redémarre automatiquement le serveur en cas de crash.
+
+## Pare-feu
+
+```bash
+./deploy/firewall.sh   # ouvre uniquement 22 (SSH), 30120 (FiveM), 40120 (txAdmin)
+```
+
+## Sauvegardes automatiques de la base de données
+
+```bash
+./deploy/backup-db.sh   # sauvegarde manuelle dans ./backups (gzip, rotation 7 jours)
+```
+
+Pour l'automatiser, ajouter au crontab (`crontab -e`) :
+```
+0 4 * * * /chemin/vers/gta-rp/deploy/backup-db.sh >> /var/log/gta-rp-backup.log 2>&1
+```
+
 ## Accès libre : points d'attention
 
 - Ne **jamais** ajouter de script/`resource` de whitelist ni de vérification
