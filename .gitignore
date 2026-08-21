@@ -1,0 +1,22 @@
+# FXServer runtime (téléchargé par setup.sh, ne pas versionner)
+fxserver/
+alpine/
+run.sh
+
+# Ressources tierces clonées par setup.sh
+server-data/resources/[qb]/
+server-data/resources/[standalone]/oxmysql/
+
+# Secrets / config locale
+.env
+server-data/server.cfg.local
+
+# Logs et cache
+*.log
+cache/
+server-data/cache/
+server-data/resources/*/cache/
+
+# Divers OS/éditeurs
+.DS_Store
+*.swp
