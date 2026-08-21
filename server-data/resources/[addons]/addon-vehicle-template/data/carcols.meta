@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Squelette vide : remplacer par le carcols.meta fourni avec le pack (couleurs/livrées), si applicable. -->
+<CVehicleModelInfoVarGlobal>
+  <Kits />
+  <Lights />
+  <WheelFudge />
+</CVehicleModelInfoVarGlobal>

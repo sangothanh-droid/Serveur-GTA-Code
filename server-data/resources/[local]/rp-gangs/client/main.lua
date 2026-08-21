@@ -1,0 +1,5 @@
+RegisterNetEvent('rp-gangs:client:setWanted', function(stars)
+    local player = PlayerId()
+    SetPlayerWantedLevel(player, stars, false)
+    SetPlayerWantedLevelNow(player, false)
+end)

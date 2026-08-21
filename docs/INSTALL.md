@@ -73,6 +73,25 @@ déjà activées dans `server.cfg` :
   webhook dans `server.cfg` via `setr rp_welcome_discord_webhook "..."`, et
   adapter le texte des règles dans `resources/[local]/rp-welcome/server.lua`.
 
+## Réputation de gang et conséquences
+
+La ressource `rp-gangs` (déjà activée dans `server.cfg`) fait monter un gang
+en "paliers" (Inconnu → Surveillé → Recherché → Dangereux → Ennemi public)
+selon son activité criminelle, avec des conséquences concrètes : niveau
+recherché du joueur augmenté, multiplicateur d'argent/de risque exposé aux
+autres scripts. Voir `server-data/resources/[local]/rp-gangs/README.md`
+pour l'intégrer à vos jobs (braquages, ventes de drogue, guerres de
+territoire...). Ne pas oublier d'importer `sql/gang_reputation.sql`.
+
+## Véhicules / armes / maps additionnels
+
+Le dossier `server-data/resources/[addons]/` contient des templates vides
+pour ajouter des véhicules moddés, des armes moddées, ou des maps/MLO
+custom. Ces contenus nécessitent des fichiers binaires du jeu que je ne
+peux pas générer — voir le README de ce dossier pour la structure attendue
+et, surtout, les **précautions de sécurité** avant d'installer un pack
+téléchargé (risque de backdoor dans les mods "leakés").
+
 ## Déploiement en service (redémarrage automatique)
 
 ```bash

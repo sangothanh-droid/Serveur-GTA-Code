@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Squelette vide : remplacer par le weapons.meta fourni avec le pack d'arme,
+  ou compléter un <Item> par arme ajoutée (dégâts, cadence de tir, etc.).
+-->
+<CWeaponInfoBlob>
+  <SlotNavigateOrder />
+  <Infos>
+    <Item>
+      <Infos />
+    </Item>
+  </Infos>
+</CWeaponInfoBlob>

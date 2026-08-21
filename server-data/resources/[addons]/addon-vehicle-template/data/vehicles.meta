@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Squelette vide : remplacer par le vehicles.meta fourni avec le pack de
+  véhicule, ou éditer un <Item> par véhicule ajouté. Exemple minimal :
+
+  <CVehicleModelInfo__InitDataList>
+    <residentTxd>vehshare</residentTxd>
+    <residentAnims />
+    <InitDatas>
+      <Item>
+        <modelName>monvehicule</modelName>
+        <txdName>monvehicule</txdName>
+        <handlingId>monvehicule</handlingId>
+        <gameName>MONVEHICULE</gameName>
+        <vehicleMakeName>CUSTOM</vehicleMakeName>
+        <expressionDictName>null</expressionDictName>
+        <expressionName>null</expressionName>
+        ...
+      </Item>
+    </InitDatas>
+  </CVehicleModelInfo__InitDataList>
+-->
+<CVehicleModelInfo__InitDataList>
+  <residentTxd>vehshare</residentTxd>
+  <residentAnims />
+  <InitDatas />
+</CVehicleModelInfo__InitDataList>

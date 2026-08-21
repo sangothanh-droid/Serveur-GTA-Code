@@ -4,8 +4,15 @@ alpine/
 run.sh
 
 # Ressources tierces clonées par setup.sh
-server-data/resources/[qb]/
-server-data/resources/[standalone]/oxmysql/
+# (les crochets sont échappés : "[qb]" est un nom littéral de dossier, pas
+# une classe de caractères glob)
+server-data/resources/\[qb\]/
+server-data/resources/\[standalone\]/oxmysql/
+
+# Assets binaires des addons (véhicules/armes/maps) : à gérer séparément
+# (poids, licence), pas dans ce repo Git.
+server-data/resources/\[addons\]/*/stream/*
+!server-data/resources/\[addons\]/*/stream/.gitkeep
 
 # Secrets / config locale
 .env
