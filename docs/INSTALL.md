@@ -91,11 +91,24 @@ le détail. Une fois QBCore installé (`./setup.sh`), reporter les grades dans
 
 ## Activités criminelles
 
-Cinq activités jouables (braquage de magasin, vol de véhicule/casse auto,
-deal de drogue, course illégale, blanchiment d'argent) sont déjà activées
-dans `server.cfg` et branchées sur `rp-gangs`. Voir
-[`docs/CRIME-JOBS.md`](CRIME-JOBS.md) pour le détail de chacune et
-`docs/qb-core-items-snippet.lua` pour l'item requis par le blanchiment.
+Onze activités jouables (braquages, vol de véhicule/casse auto, deal de
+drogue, course illégale, blanchiment d'argent, labo d'armes, labo de
+drogue...) sont déjà activées dans `server.cfg` et branchées sur `rp-gangs`.
+Les labos d'armes et de drogue (`rp-weaponlab`, `rp-druglab`) sont en plus
+disputables entre gangs via `rp-labwars` (guerre de monopole : le gang qui
+contrôle un labo l'exploite moins cher et avec moins de risques). Voir
+[`docs/CRIME-JOBS.md`](CRIME-JOBS.md) pour le détail de chacune,
+`docs/qb-core-items-snippet.lua` pour l'item requis par le blanchiment, et
+importer `rp-labwars/sql/lab_control.sql`.
+
+## Jobs légaux
+
+Six jobs légaux (mécanicien, agent de sécurité, taxi, livreur, éboueur,
+bûcheron) sont déjà activés dans `server.cfg`, indépendants du système de
+gangs. Voir [`docs/LEGAL-JOBS.md`](LEGAL-JOBS.md) — le mécanicien et l'agent
+de sécurité nécessitent d'assigner le métier via
+`docs/qb-core-jobs-snippet.lua`, les quatre autres sont ouverts à tous les
+joueurs sans configuration supplémentaire.
 
 ## Véhicules / armes / maps additionnels
 

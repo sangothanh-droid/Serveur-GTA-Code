@@ -1,9 +1,10 @@
 # Activités criminelles
 
-Neuf activités indépendantes, chacune reliée au système `rp-gangs` (le joueur
-doit appartenir à un gang pour en profiter, et chaque succès fait monter la
-réputation du gang concerné). Toutes dépendent de **`rp-crime-core`**
-(helpers partagés : argent, gang du joueur, alerte police) et de **QBCore**.
+Onze activités indépendantes, chacune reliée au système `rp-gangs` (le
+joueur doit appartenir à un gang pour en profiter, et chaque succès fait
+monter la réputation du gang concerné). Toutes dépendent de
+**`rp-crime-core`** (helpers partagés : argent, gang du joueur, alerte
+police) et de **QBCore**.
 
 | Resource | Commande / interaction | Récompense | Réputation |
 |---|---|---|---|
@@ -16,6 +17,30 @@ réputation du gang concerné). Toutes dépendent de **`rp-crime-core`**
 | `rp-armstrafficking` | `[E]` au point de rendez-vous désert, risque d'embuscade | $1000–4000 | +25 |
 | `rp-turfwar` | Automatique : occuper seul le territoire d'un autre gang | — | +50 au gang qui capture |
 | `rp-weedfarm` | `[E]` sur les plants (désert), puis `[E]` au labo pour vendre | $350/unité | +10 par tranche de 5 unités |
+| `rp-weaponlab` | `[E]` dans l'un des 2 ateliers, fabrique une arme + munitions | arme aléatoire | +20 |
+| `rp-druglab` | `[E]` dans l'un des 2 labos, cuisine un lot de drogue | $120/unité | +15 par tranche de 5 unités |
+
+## Labos et guerre pour le monopole
+
+`rp-weaponlab` et `rp-druglab` sont chacun liés à **`rp-labwars`**, qui gère
+le contrôle de ces 4 labos comme des territoires disputés (indépendamment
+des territoires "maison" de `rp-gangs`) :
+
+- Chaque labo démarre neutre (aucun gang propriétaire).
+- Toutes les 30s, si un **seul** gang occupe la zone d'un labo (rayon 15m),
+  il gagne des points de contrôle. Si deux gangs ou plus sont présents, rien
+  ne se passe (le monopole reste disputé).
+- À 100 points, ce gang devient propriétaire du labo (annoncé dans le chat,
+  +40 de réputation), et le contrôle est persisté en base
+  (`rp-labwars/sql/lab_control.sql`, à importer).
+- **Le gang propriétaire paie moitié moins cher** pour fabriquer/cuisiner
+  dans "son" labo. Un gang non-propriétaire qui l'utilise quand même a un
+  risque d'échec (matériaux perdus / explosion signalée à la police).
+
+C'est ce qui crée l'incitatif à se battre pour le monopole : contrôler un
+labo rend son exploitation moins chère et plus sûre, donc plus rentable —
+et rien n'empêche un autre gang de venir le reprendre en l'occupant seul
+suffisamment longtemps.
 
 ## Installation
 
@@ -40,6 +65,14 @@ réputation du gang concerné). Toutes dépendent de **`rp-crime-core`**
 6. `rp-weedfarm` ne nécessite aucun item d'inventaire : la récolte est
    comptabilisée en mémoire par joueur (remise à zéro à la déconnexion) puis
    convertie en argent au labo de conditionnement.
+7. `rp-weaponlab` et `rp-druglab` doivent démarrer **avant** `rp-labwars`
+   (déjà fait dans `server.cfg`) : celui-ci lit leurs emplacements de labo
+   au démarrage via `exports:GetLabs()`. Importer aussi
+   `rp-labwars/sql/lab_control.sql`.
+8. `rp-weaponlab` donne de vraies armes/munitions (items QBCore standards :
+   `weapon_pistol`, `weapon_smg`, `weapon_pumpshotgun`, `weapon_assaultrifle`
+   + munitions associées), déjà enregistrées par défaut dans QBCore — aucun
+   item supplémentaire à ajouter.
 
 ## Personnalisation
 
