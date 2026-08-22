@@ -17,14 +17,40 @@ police) et de **QBCore**.
 | `rp-armstrafficking` | `[E]` au point de rendez-vous désert, risque d'embuscade | $1000–4000 | +25 |
 | `rp-turfwar` | Automatique : occuper seul le territoire d'un autre gang | — | +50 au gang qui capture |
 | `rp-weedfarm` | `[E]` sur les plants (désert), puis `[E]` au labo pour vendre | $350/unité | +10 par tranche de 5 unités |
-| `rp-weaponlab` | `[E]` dans l'un des 2 ateliers, fabrique une arme + munitions | arme aléatoire | +20 |
-| `rp-druglab` | `[E]` dans l'un des 2 labos, cuisine un lot de drogue | $120/unité | +15 par tranche de 5 unités |
+| `rp-weaponlab` | `[E]` dans l'un des 5 ateliers (un par arme), fabrique l'arme + munitions | arme du labo | +10 à +30 selon l'arme |
+| `rp-druglab` | `[E]` dans l'un des 4 labos (un par drogue), cuisine un lot | $70–160/unité selon la drogue | +10 à +18 par tranche de 5 unités |
+
+### Détail des ateliers d'armes (`rp-weaponlab`)
+
+Un labo = une arme précise, pas de tirage aléatoire. Les noms correspondent
+aux armes vanilla GTA V les plus proches (voir la note de sécurité plus bas
+si vous voulez le skin visuel exact d'un AK-47/Uzi).
+
+| Labo | Arme produite | Coût (non-propriétaire) | Temps |
+|---|---|---|---|
+| Atelier Armes de Poing - Davis | `weapon_pistol` | $200 | 15s |
+| Atelier Fusils à Pompe - Cypress Flats | `weapon_pumpshotgun` | $350 | 20s |
+| Atelier Uzi - Rancho | `weapon_microsmg` | $400 | 22s |
+| Atelier AK-47u (compact) - Grand Senora | `weapon_specialcarbine` | $600 | 28s |
+| Atelier AK-47 - Paleto Bay | `weapon_assaultrifle` | $800 | 35s |
+
+### Détail des labos de drogue (`rp-druglab`)
+
+La culture de cannabis reste dans `rp-weedfarm` (cycle plantation/récolte
+différent d'un labo de cuisson). `rp-druglab` couvre les drogues cuisinées :
+
+| Labo | Produit | Coût (non-propriétaire) | Prix/unité |
+|---|---|---|---|
+| Labo de Meth - Grand Senora | Méthamphétamine | $400 | $120 |
+| Labo de Cocaïne - Storm Drain | Cocaïne | $550 | $160 |
+| Labo de Crack - Davis | Crack (cocaïne base) | $250 | $90 |
+| Serre à Champignons - Mont Chiliad | Champignons hallucinogènes | $150 | $70 |
 
 ## Labos et guerre pour le monopole
 
-`rp-weaponlab` et `rp-druglab` sont chacun liés à **`rp-labwars`**, qui gère
-le contrôle de ces 4 labos comme des territoires disputés (indépendamment
-des territoires "maison" de `rp-gangs`) :
+`rp-weaponlab` (5 ateliers) et `rp-druglab` (4 labos) sont tous liés à
+**`rp-labwars`**, qui gère le contrôle de ces 9 sites comme des territoires
+disputés (indépendamment des territoires "maison" de `rp-gangs`) :
 
 - Chaque labo démarre neutre (aucun gang propriétaire).
 - Toutes les 30s, si un **seul** gang occupe la zone d'un labo (rayon 15m),
@@ -70,9 +96,12 @@ suffisamment longtemps.
    au démarrage via `exports:GetLabs()`. Importer aussi
    `rp-labwars/sql/lab_control.sql`.
 8. `rp-weaponlab` donne de vraies armes/munitions (items QBCore standards :
-   `weapon_pistol`, `weapon_smg`, `weapon_pumpshotgun`, `weapon_assaultrifle`
-   + munitions associées), déjà enregistrées par défaut dans QBCore — aucun
-   item supplémentaire à ajouter.
+   `weapon_pistol`, `weapon_pumpshotgun`, `weapon_microsmg`,
+   `weapon_specialcarbine`, `weapon_assaultrifle` + munitions associées),
+   déjà enregistrées par défaut dans QBCore — aucun item supplémentaire à
+   ajouter. Ce ne sont **pas** des skins visuels d'AK-47/Uzi réels : pour ça,
+   voir `server-data/resources/[addons]/README.md` et n'utiliser qu'un pack
+   de skins d'armes légitime (jamais un pack "leaké").
 
 ## Personnalisation
 

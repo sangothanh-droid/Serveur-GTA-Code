@@ -18,7 +18,7 @@ framework [QBCore](https://github.com/qbcore-framework).
 | `server-data/resources/[local]/rp-crime-core` | Helpers partagés (argent, gang, alerte police) pour les activités criminelles |
 | `server-data/resources/[local]/rp-shoprobbery`, `rp-carjack`, `rp-drugdealing`, `rp-illegalrace`, `rp-laundering`, `rp-heist`, `rp-armstrafficking`, `rp-turfwar`, `rp-weedfarm`, `rp-weaponlab`, `rp-druglab` | 11 activités criminelles jouables, voir `docs/CRIME-JOBS.md` |
 | `server-data/resources/[local]/rp-labwars`  | Guerre de monopole sur les labos d'armes/drogue (contrôle de territoire) |
-| `server-data/resources/[local]/rp-job-core`, `rp-mechanic`, `rp-security`, `rp-taxi`, `rp-delivery`, `rp-garbage`, `rp-lumberjack` | 6 jobs légaux jouables, voir `docs/LEGAL-JOBS.md` |
+| `server-data/resources/[local]/rp-job-core`, `rp-mechanic`, `rp-security`, `rp-realestate`, `rp-taxi`, `rp-delivery`, `rp-garbage`, `rp-lumberjack`, `rp-fisherman`, `rp-postal`, `rp-busker` | 10 jobs légaux jouables, voir `docs/LEGAL-JOBS.md` |
 | `server-data/resources/[addons]/`           | Templates pour véhicules/armes/maps additionnels (assets à fournir) |
 | `deploy/install-service.sh` | Installe le serveur comme service systemd (auto-restart)     |
 | `deploy/firewall.sh`         | Configure UFW (ports 22, 30120, 40120 uniquement)             |

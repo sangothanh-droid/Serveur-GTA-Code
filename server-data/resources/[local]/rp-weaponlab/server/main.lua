@@ -10,23 +10,6 @@ local function getLabOwner(labId)
     return nil
 end
 
-local function pickLoot()
-    local totalWeight = 0
-    for _, entry in ipairs(Config.LootTable) do
-        totalWeight = totalWeight + entry.weight
-    end
-
-    local roll = math.random(totalWeight)
-    local cumulative = 0
-    for _, entry in ipairs(Config.LootTable) do
-        cumulative = cumulative + entry.weight
-        if roll <= cumulative then
-            return entry
-        end
-    end
-    return Config.LootTable[1]
-end
-
 RegisterNetEvent('rp-weaponlab:server:craft', function(labIndex)
     local src = source
     local lab = Config.Labs[labIndex]
@@ -46,7 +29,7 @@ RegisterNetEvent('rp-weaponlab:server:craft', function(labIndex)
     end
 
     local isOwner = getLabOwner(lab.id) == gang
-    local cost = isOwner and math.floor(Config.MaterialCost * (1 - Config.OwnerDiscountPercent / 100)) or Config.MaterialCost
+    local cost = isOwner and math.floor(lab.cost * (1 - Config.OwnerDiscountPercent / 100)) or lab.cost
 
     if Player.PlayerData.money['cash'] < cost then
         TriggerClientEvent('QBCore:Notify', src, ('Il vous faut $%d de matériaux.'):format(cost), 'error')
@@ -54,7 +37,7 @@ RegisterNetEvent('rp-weaponlab:server:craft', function(labIndex)
     end
 
     Player.Functions.RemoveMoney('cash', cost)
-    TriggerClientEvent('rp-weaponlab:client:startCraft', src, Config.CraftTimeMs, labIndex, isOwner)
+    TriggerClientEvent('rp-weaponlab:client:startCraft', src, lab.craftTimeMs, labIndex, isOwner)
 end)
 
 RegisterNetEvent('rp-weaponlab:server:finishCraft', function(labIndex, isOwner, success)
@@ -74,16 +57,15 @@ RegisterNetEvent('rp-weaponlab:server:finishCraft', function(labIndex, isOwner, 
         return
     end
 
-    local loot = pickLoot()
-    Player.Functions.AddItem(loot.item, 1)
-    Player.Functions.AddItem(loot.ammo, loot.ammoAmount)
+    Player.Functions.AddItem(lab.item, 1)
+    Player.Functions.AddItem(lab.ammo, lab.ammoAmount)
 
     local gang = exports['rp-crime-core']:GetPlayerGang(src)
     if gang then
-        exports['rp-gangs']:AddReputation(gang, Config.RepGain, src)
+        exports['rp-gangs']:AddReputation(gang, lab.repGain, src)
     end
 
-    TriggerClientEvent('QBCore:Notify', src, ('Fabrication réussie : %s obtenue.'):format(loot.item), 'success')
+    TriggerClientEvent('QBCore:Notify', src, ('Fabrication réussie : %s obtenue.'):format(lab.item), 'success')
 
     if math.random(100) <= Config.PoliceCallChancePercent then
         exports['rp-crime-core']:AlertPolice(lab.coords, "Détonations suspectes signalées près d'un atelier.")

@@ -29,7 +29,7 @@ RegisterNetEvent('rp-druglab:server:cook', function(labIndex)
     end
 
     local isOwner = getLabOwner(lab.id) == gang
-    local cost = isOwner and math.floor(Config.IngredientCost * (1 - Config.OwnerDiscountPercent / 100)) or Config.IngredientCost
+    local cost = isOwner and math.floor(lab.cost * (1 - Config.OwnerDiscountPercent / 100)) or lab.cost
 
     if Player.PlayerData.money['cash'] < cost then
         TriggerClientEvent('QBCore:Notify', src, ('Il vous faut $%d de précurseurs chimiques.'):format(cost), 'error')
@@ -37,7 +37,7 @@ RegisterNetEvent('rp-druglab:server:cook', function(labIndex)
     end
 
     Player.Functions.RemoveMoney('cash', cost)
-    TriggerClientEvent('rp-druglab:client:startCook', src, Config.CookTimeMs, labIndex, isOwner)
+    TriggerClientEvent('rp-druglab:client:startCook', src, lab.cookTimeMs, labIndex, isOwner)
 end)
 
 RegisterNetEvent('rp-druglab:server:finishCook', function(labIndex, isOwner, success)
@@ -53,13 +53,13 @@ RegisterNetEvent('rp-druglab:server:finishCook', function(labIndex, isOwner, suc
         return
     end
 
-    local yield = math.random(Config.YieldMin, Config.YieldMax)
-    local reward = yield * Config.PricePerUnit
+    local yield = math.random(lab.yieldMin, lab.yieldMax)
+    local reward = yield * lab.pricePerUnit
     exports['rp-crime-core']:AddMoney(src, reward, 'cash')
 
     local gang = exports['rp-crime-core']:GetPlayerGang(src)
     if gang then
-        exports['rp-gangs']:AddReputation(gang, math.floor(yield / 5) * Config.RepGainPer5Units, src)
+        exports['rp-gangs']:AddReputation(gang, math.floor(yield / 5) * lab.repGainPer5Units, src)
     end
 
     TriggerClientEvent('QBCore:Notify', src, ('%d unité(s) produite(s) et vendue(s) : +$%d'):format(yield, reward), 'success')
