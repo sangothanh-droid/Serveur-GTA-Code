@@ -15,6 +15,8 @@ framework [QBCore](https://github.com/qbcore-framework).
 | `server-data/resources/[local]/rp-queue`    | File d'attente FIFO (avec priorité staff) quand le serveur est plein |
 | `server-data/resources/[local]/rp-welcome`  | Écran de règlement à l'arrivée + logs Discord (join/leave)   |
 | `server-data/resources/[local]/rp-gangs`    | Réputation de gang avec conséquences (police, économie)      |
+| `server-data/resources/[local]/rp-crime-core` | Helpers partagés (argent, gang, alerte police) pour les activités criminelles |
+| `server-data/resources/[local]/rp-shoprobbery`, `rp-carjack`, `rp-drugdealing`, `rp-illegalrace`, `rp-laundering` | 5 activités criminelles jouables, voir `docs/CRIME-JOBS.md` |
 | `server-data/resources/[addons]/`           | Templates pour véhicules/armes/maps additionnels (assets à fournir) |
 | `deploy/install-service.sh` | Installe le serveur comme service systemd (auto-restart)     |
 | `deploy/firewall.sh`         | Configure UFW (ports 22, 30120, 40120 uniquement)             |

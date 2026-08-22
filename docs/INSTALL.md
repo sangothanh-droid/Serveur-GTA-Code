@@ -89,6 +89,14 @@ véhicules, tenue, grades, rivalités) — voir le README de cette resource pour
 le détail. Une fois QBCore installé (`./setup.sh`), reporter les grades dans
 `qb-core/shared/gangs.lua` à partir de `docs/qb-core-gangs-snippet.lua`.
 
+## Activités criminelles
+
+Cinq activités jouables (braquage de magasin, vol de véhicule/casse auto,
+deal de drogue, course illégale, blanchiment d'argent) sont déjà activées
+dans `server.cfg` et branchées sur `rp-gangs`. Voir
+[`docs/CRIME-JOBS.md`](CRIME-JOBS.md) pour le détail de chacune et
+`docs/qb-core-items-snippet.lua` pour l'item requis par le blanchiment.
+
 ## Véhicules / armes / maps additionnels
 
 Le dossier `server-data/resources/[addons]/` contient des templates vides
