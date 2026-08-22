@@ -7,7 +7,8 @@ description 'Réputation de gang avec conséquences (police, économie)'
 version '1.0.0'
 
 shared_scripts {
-    'shared/config.lua'
+    'shared/config.lua',
+    'shared/gangs.lua'
 }
 
 client_scripts {

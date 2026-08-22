@@ -83,6 +83,12 @@ autres scripts. Voir `server-data/resources/[local]/rp-gangs/README.md`
 pour l'intégrer à vos jobs (braquages, ventes de drogue, guerres de
 territoire...). Ne pas oublier d'importer `sql/gang_reputation.sql`.
 
+Un roster de 5 organisations est défini dans
+`server-data/resources/[local]/rp-gangs/shared/gangs.lua` (nom, territoire,
+véhicules, tenue, grades, rivalités) — voir le README de cette resource pour
+le détail. Une fois QBCore installé (`./setup.sh`), reporter les grades dans
+`qb-core/shared/gangs.lua` à partir de `docs/qb-core-gangs-snippet.lua`.
+
 ## Véhicules / armes / maps additionnels
 
 Le dossier `server-data/resources/[addons]/` contient des templates vides

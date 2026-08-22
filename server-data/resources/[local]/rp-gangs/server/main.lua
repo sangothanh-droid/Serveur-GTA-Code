@@ -62,6 +62,11 @@ end
 -- @param amount number
 -- @param src number|nil source du joueur à l'origine de l'action (pour les conséquences directes)
 function AddReputation(gangName, amount, src)
+    if not Gangs[gangName] then
+        print(('[rp-gangs] Gang inconnu ignoré : %s (voir shared/gangs.lua)'):format(gangName))
+        return
+    end
+
     ensureLoaded(gangName, function(current)
         local oldTierIndex = getTierIndex(current)
         local updated = math.max(Config.MinReputation, current + amount)
@@ -90,6 +95,14 @@ exports('GetGangMultiplier', function(gangName, cb)
         local tier = Config.Tiers[getTierIndex(points)]
         cb(tier.incomeMultiplier, tier.policeMultiplier, tier.label)
     end)
+end)
+
+exports('GetGangInfo', function(gangName)
+    return Gangs[gangName]
+end)
+
+exports('GetAllGangs', function()
+    return Gangs
 end)
 
 -- Décroissance horaire de la réputation des gangs inactifs.
