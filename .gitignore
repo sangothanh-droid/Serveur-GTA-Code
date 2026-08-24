@@ -1,0 +1,37 @@
+# FXServer runtime (téléchargé par setup.sh, ne pas versionner)
+fxserver/
+alpine/
+run.sh
+
+# Ressources tierces clonées par setup.sh
+# (les crochets sont échappés : "[qb]" est un nom littéral de dossier, pas
+# une classe de caractères glob)
+server-data/resources/\[qb\]/
+server-data/resources/\[standalone\]/oxmysql/
+server-data/resources/\[system\]/
+
+# Historique de la console FXServer
+server-data/.replxx_history
+
+# Assets binaires des addons (véhicules/armes/maps) : à gérer séparément
+# (poids, licence), pas dans ce repo Git.
+server-data/resources/\[addons\]/*/stream/*
+!server-data/resources/\[addons\]/*/stream/.gitkeep
+
+# Secrets / config locale (contient la licence FiveM et l'identifiant admin :
+# ne jamais versionner le server.cfg réel, seul server.cfg.example l'est)
+.env
+server-data/server.cfg
+
+# Logs et cache
+*.log
+cache/
+server-data/cache/
+server-data/resources/*/cache/
+
+# Sauvegardes de la base de données
+backups/
+
+# Divers OS/éditeurs
+.DS_Store
+*.swp
