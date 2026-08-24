@@ -157,6 +157,8 @@ ensure rp-nightclub
 # --- Divertissement / social (ouverts à tous, sans lien gang/job) ---
 ensure rp-casino
 ensure rp-carmeet
+ensure rp-lasergame
+ensure rp-arcade
 
 # --- Contenus additionnels (véhicules/armes/maps) ---
 # Décommenter et adapter après avoir rempli un template dans

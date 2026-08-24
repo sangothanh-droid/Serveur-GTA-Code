@@ -22,13 +22,15 @@ framework [QBCore](https://github.com/qbcore-framework).
 | `server-data/resources/[local]/rp-gangwar-events` | Point chaud périodique (toutes les 3h) sur un territoire de gang aléatoire, annoncé chat + Discord |
 | `server-data/resources/[local]/rp-streetrep`, `rp-pettycrime`, `rp-soloburglary`, `rp-lonewolfcarjack` | Petites frappes solo (hors gangs officiels), système parallèle à `rp-gangs`, voir `docs/SOLO-CRIME.md` |
 | `server-data/resources/[local]/rp-job-core`, `rp-mechanic`, `rp-security`, `rp-realestate`, `rp-taxi`, `rp-delivery`, `rp-garbage`, `rp-lumberjack`, `rp-fisherman`, `rp-postal`, `rp-busker`, `rp-carwash`, `rp-police`, `rp-ambulance`, `rp-firefighter`, `rp-restaurant`, `rp-barber`, `rp-nightclub` | 17 jobs légaux jouables, voir `docs/LEGAL-JOBS.md` |
-| `server-data/resources/[local]/rp-casino`, `rp-carmeet` | Divertissement/social ouverts à tous (mini-jeu de mise, rassemblement voitures), voir `docs/LEGAL-JOBS.md` |
+| `server-data/resources/[local]/rp-casino`, `rp-carmeet` | Divertissement/social ouverts à tous (mini-jeux de mise, rassemblement voitures), voir `docs/LEGAL-JOBS.md` |
+| `server-data/resources/[local]/rp-lasergame`, `rp-arcade` | Loisirs ouverts à tous (laser game entre joueurs, bornes d'arcade), voir `docs/ACTIVITIES.md` |
 | `server-data/resources/[addons]/`           | Templates pour véhicules/armes/maps additionnels (assets à fournir) |
 | `deploy/install-service.sh` | Installe le serveur comme service systemd (auto-restart)     |
 | `deploy/firewall.sh`         | Configure UFW (ports 22, 30120, 40120 uniquement)             |
 | `deploy/backup-db.sh`        | Sauvegarde + rotation de la base de données                   |
 | `docs/INSTALL.md`            | Guide d'installation pas à pas                                |
 | `docs/SOLO-CRIME.md`         | Petites frappes solo hors gangs officiels (réputation de rue) |
+| `docs/ACTIVITIES.md`         | Loisirs et casino étendu (mini-jeux, laser game, arcade)      |
 
 ## Démarrage rapide
 

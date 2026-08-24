@@ -3,8 +3,8 @@ game 'gta5'
 lua54 'yes'
 
 author 'Serveur-GTA-Code'
-description 'Casino ouvert à tous : mise simple, machine à sous, blackjack, paris hippiques'
-version '1.1.0'
+description 'Laser game ouvert à tous : session de tag entre joueurs dans une arène désignée'
+version '1.0.0'
 
 shared_scripts {
     'shared/config.lua'
