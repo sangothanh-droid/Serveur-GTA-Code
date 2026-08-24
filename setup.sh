@@ -17,9 +17,9 @@ command -v tar  >/dev/null || { echo "tar est requis"; exit 1; }
 
 echo "==> Récupération de la dernière version recommandée de FXServer (Linux)"
 RECOMMENDED_JSON="$(curl -fsSL https://changelogs-live.fivem.net/api/changelog/versions/linux/server)"
-ARTIFACT_URL="https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/$(
-  echo "$RECOMMENDED_JSON" | grep -o '"recommended":[0-9]*' | grep -o '[0-9]*'
-)/fx.tar.xz"
+ARTIFACT_URL="$(echo "$RECOMMENDED_JSON" | grep -o '"recommended_download":"[^"]*"' | cut -d'"' -f4)"
+
+[ -n "$ARTIFACT_URL" ] || { echo "Impossible de déterminer l'URL de FXServer (réponse API inattendue)"; exit 1; }
 
 mkdir -p "$FX_DIR"
 echo "==> Téléchargement de FXServer depuis $ARTIFACT_URL"
