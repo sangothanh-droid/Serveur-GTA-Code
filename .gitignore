@@ -14,9 +14,10 @@ server-data/resources/\[standalone\]/oxmysql/
 server-data/resources/\[addons\]/*/stream/*
 !server-data/resources/\[addons\]/*/stream/.gitkeep
 
-# Secrets / config locale
+# Secrets / config locale (contient la licence FiveM et l'identifiant admin :
+# ne jamais versionner le server.cfg réel, seul server.cfg.example l'est)
 .env
-server-data/server.cfg.local
+server-data/server.cfg
 
 # Logs et cache
 *.log

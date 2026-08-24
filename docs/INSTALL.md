@@ -31,8 +31,12 @@
    ```bash
    ./setup.sh
    ```
-   Ce script télécharge le binaire FXServer et clone les ressources QBCore dans
-   `server-data/resources/`.
+   Ce script télécharge le binaire FXServer, clone les ressources QBCore dans
+   `server-data/resources/`, et crée `server-data/server.cfg` à partir du
+   template `server-data/server.cfg.example` s'il n'existe pas encore. Ce
+   fichier `server.cfg` réel n'est **pas versionné** (voir `.gitignore`) car
+   il contiendra ta licence FiveM et ton identifiant admin — ne jamais le
+   commiter, surtout sur un repo public.
 
 5. **Importer le schéma SQL de QBCore**
    Le fichier SQL se trouve dans `server-data/resources/[qb]/qb-core/qb-core.sql`

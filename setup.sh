@@ -56,13 +56,19 @@ for repo in "${QB_RESOURCES[@]}"; do
   fi
 done
 
+if [ ! -f "$ROOT_DIR/server-data/server.cfg" ]; then
+  echo "==> Création de server-data/server.cfg à partir du template (non versionné, contient tes secrets)"
+  cp "$ROOT_DIR/server-data/server.cfg.example" "$ROOT_DIR/server-data/server.cfg"
+fi
+
 cat <<'EOF'
 
 ==> Installation terminée.
 
 Étapes restantes :
   1. Copier .env.example vers .env et renseigner les valeurs (DB, clé FiveM, clé Steam).
-  2. Éditer server-data/server.cfg (licence, admin, nom du serveur).
+  2. Éditer server-data/server.cfg (licence, admin, nom du serveur) — ce fichier
+     n'est PAS versionné (voir .gitignore), tes secrets restent sur ce serveur.
   3. Démarrer la base de données : docker compose up -d
   4. Importer le schéma SQL de qb-core (voir server-data/resources/[qb]/qb-core) dans la base.
   5. Lancer le serveur :

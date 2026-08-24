@@ -8,7 +8,8 @@ framework [QBCore](https://github.com/qbcore-framework).
 
 | Fichier / dossier          | Rôle                                                        |
 |-----------------------------|--------------------------------------------------------------|
-| `server-data/server.cfg`    | Configuration principale du serveur FXServer                |
+| `server-data/server.cfg.example` | Template de configuration FXServer (versionné, sans secrets) |
+| `server-data/server.cfg`    | Configuration réelle (créée par `setup.sh`, **non versionnée**, contient ta licence FiveM et ton identifiant admin) |
 | `docker-compose.yml`        | Base de données MariaDB + Adminer                            |
 | `.env.example`               | Modèle des variables d'environnement (à copier en `.env`)   |
 | `setup.sh`                   | Télécharge FXServer et clone les ressources QBCore           |
