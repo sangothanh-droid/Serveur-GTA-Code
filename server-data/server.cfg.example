@@ -94,6 +94,9 @@ ensure qb-hud
 ensure qb-radialmenu
 ensure qb-weathersync
 
+# --- Concession automobile (nécessite oxmysql, voir docs/VEHICLES.md) ---
+ensure rp-dealership
+
 # --- Réputation de gang / conséquences (nécessite oxmysql) ---
 ensure rp-gangs
 

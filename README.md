@@ -16,6 +16,7 @@ framework [QBCore](https://github.com/qbcore-framework).
 | `server-data/resources/[local]/rp-loadingscreen` | Écran de chargement personnalisé (NUI HTML/CSS/JS pur, sans asset binaire) |
 | `server-data/resources/[local]/rp-scoreboard` | Scoreboard NUI : liste des joueurs connectés (nom, ID, ping) en maintenant TAB |
 | `server-data/resources/[local]/rp-phone` | Téléphone minimaliste (F1 ou `/phone`) : solde bancaire, messages entre joueurs, notes locales |
+| `server-data/resources/[local]/rp-dealership` | Concession automobile : catalogue, essai, achat, voir `docs/VEHICLES.md` |
 | `server-data/resources/[local]/rp-queue`    | File d'attente FIFO (avec priorité staff) quand le serveur est plein |
 | `server-data/resources/[local]/rp-welcome`  | Écran de règlement à l'arrivée + logs Discord (join/leave)   |
 | `server-data/resources/[local]/rp-gangs`    | Réputation de gang avec conséquences (police, économie)      |
@@ -35,6 +36,7 @@ framework [QBCore](https://github.com/qbcore-framework).
 | `docs/SOLO-CRIME.md`         | Petites frappes solo hors gangs officiels (réputation de rue) |
 | `docs/ACTIVITIES.md`         | Loisirs et casino étendu (mini-jeux, laser game, arcade)      |
 | `docs/HUD-THEME.md`          | Code couleur cohérent des blips sur la carte                  |
+| `docs/VEHICLES.md`           | Concession automobile et garages (`player_vehicles`)          |
 
 ## Démarrage rapide
 
