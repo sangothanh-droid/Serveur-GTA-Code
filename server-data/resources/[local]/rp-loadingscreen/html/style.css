@@ -1,0 +1,131 @@
+:root {
+    --color-bg-top: #0d0a1f;
+    --color-bg-mid: #2a1b4d;
+    --color-bg-bottom: #7a3b1e;
+    --color-accent: #e8a13c;
+    --color-accent-soft: #f2c879;
+    --color-text: #f4ede1;
+    --color-text-dim: #c9bfae;
+    --font-stack: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: var(--font-stack);
+    color: var(--color-text);
+    background: var(--color-bg-top);
+}
+
+.background {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(180deg,
+        var(--color-bg-top) 0%,
+        var(--color-bg-mid) 55%,
+        var(--color-bg-bottom) 100%);
+    z-index: -1;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding: 0 5vw;
+}
+
+.server-name {
+    font-size: 6.5vw;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    text-shadow: 0 0.2vw 1.5vw rgba(232, 161, 60, 0.35);
+}
+
+.server-name-main {
+    color: var(--color-text);
+}
+
+.server-name-accent {
+    color: var(--color-accent);
+}
+
+.server-subtitle {
+    margin-top: 1vw;
+    font-size: 1.3vw;
+    color: var(--color-text-dim);
+    letter-spacing: 0.03em;
+}
+
+.progress-container {
+    width: min(480px, 40vw);
+    margin-top: 4vw;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 10px;
+    border-radius: 999px;
+    background: rgba(244, 237, 225, 0.12);
+    overflow: hidden;
+    border: 1px solid rgba(244, 237, 225, 0.18);
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--color-accent), var(--color-accent-soft));
+    transition: width 0.3s ease-out;
+}
+
+.progress-label {
+    margin-top: 0.8vw;
+    font-size: 0.95vw;
+    color: var(--color-text-dim);
+}
+
+.tips {
+    position: absolute;
+    bottom: 6vh;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    padding: 0 8vw;
+}
+
+.tip-text {
+    font-size: 1.05vw;
+    color: var(--color-text-dim);
+    max-width: 900px;
+    opacity: 1;
+    transition: opacity 0.4s ease-in-out;
+}
+
+.tip-text.fade {
+    opacity: 0;
+}
+
+.footer {
+    position: absolute;
+    bottom: 1.5vh;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 0.75vw;
+    color: rgba(244, 237, 225, 0.35);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}

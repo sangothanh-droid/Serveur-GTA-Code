@@ -47,6 +47,9 @@ setr rp_welcome_discord_webhook ""
 # --- Logs Discord (annonce des points chauds de rp-gangwar-events) ---
 setr rp_gangwar_discord_webhook ""
 
+# --- Écran de chargement personnalisé ---
+ensure rp-loadingscreen
+
 # --- Ressources système FiveM ---
 ensure mapmanager
 ensure chat
