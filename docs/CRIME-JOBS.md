@@ -1,6 +1,6 @@
 # Activités criminelles
 
-Onze activités indépendantes, chacune reliée au système `rp-gangs` (le
+Treize activités indépendantes, chacune reliée au système `rp-gangs` (le
 joueur doit appartenir à un gang pour en profiter, et chaque succès fait
 monter la réputation du gang concerné). Toutes dépendent de
 **`rp-crime-core`** (helpers partagés : argent, gang du joueur, alerte
@@ -19,6 +19,8 @@ police) et de **QBCore**.
 | `rp-weedfarm` | `[E]` sur les plants (désert), puis `[E]` au labo pour vendre | $350/unité | +10 par tranche de 5 unités |
 | `rp-weaponlab` | `[E]` dans l'un des 5 ateliers (un par arme), fabrique l'arme + munitions | arme du labo | +10 à +30 selon l'arme |
 | `rp-druglab` | `[E]` dans l'un des 4 labos (un par drogue), cuisine un lot | $70–160/unité selon la drogue | +10 à +18 par tranche de 5 unités |
+| `rp-atmrobbery` | Approcher un distributeur (4 emplacements), `[E]` pour braquer | $150–400 | +8 |
+| `rp-bountyhunter` | Une cible apparaît aléatoirement dans une des 3 zones de combat, `[E]` pour l'affronter | $600–1800 | +30 |
 
 ### Détail des ateliers d'armes (`rp-weaponlab`)
 
@@ -68,6 +70,42 @@ labo rend son exploitation moins chère et plus sûre, donc plus rentable —
 et rien n'empêche un autre gang de venir le reprendre en l'occupant seul
 suffisamment longtemps.
 
+## Point chaud périodique (`rp-gangwar-events`)
+
+Toutes les `Config.IntervalMs` (3h par défaut), `rp-gangwar-events` choisit
+un territoire de gang au hasard (parmi ceux définis dans
+`rp-gangs/shared/gangs.lua`) et l'annonce comme "point chaud" pendant
+`Config.HotzoneDurationMs` (15 min par défaut) :
+
+- Annonce dans le chat (`^1[GANGWAR]`) et sur le webhook Discord dédié
+  (`rp_gangwar_discord_webhook`, laisser vide pour désactiver).
+- Un blip rouge clignotant indique la zone à tous les joueurs.
+- Toutes les 60s pendant la durée du point chaud, chaque membre de gang
+  présent dans le rayon du territoire fait gagner `Config.RepBonusPerTick`
+  (10 par défaut) de réputation à son gang — rester sur place pendant tout
+  le point chaud rapporte donc plusieurs bonus cumulés.
+- Aucune interaction manuelle requise ; un seul point chaud actif à la fois.
+
+## Chasse à la prime (`rp-bountyhunter`)
+
+Toutes les `Config.SpawnIntervalMs` (20 min par défaut, si aucune cible
+n'est déjà active), une cible apparaît dans l'une des `Config.CombatZones`
+(3 zones de combat désignées, loin des zones civiles denses). Le premier
+joueur d'un gang à s'approcher (`[E]`) déclenche l'affrontement
+(`Config.HuntTimeMs`) ; en cas de succès, il touche la récompense et son
+gang gagne de la réputation. Si l'affrontement échoue (le joueur annule ou
+meurt), la cible redevient disponible pour quelqu'un d'autre.
+
+## Braquage de distributeurs (`rp-atmrobbery`)
+
+Contrairement aux autres braquages (qui ont une chance de passer
+inaperçus), braquer un distributeur (`Config.ATMs`, 4 emplacements)
+déclenche **systématiquement et immédiatement**
+`exports['rp-crime-core']:AlertPolice` dès le début du braquage — c'est le
+compromis du gain rapide (`Config.RobTimeMs` de 8s seulement) : moins
+rentable et plus risqué à l'unité que `rp-shoprobbery`, mais beaucoup plus
+rapide à répéter.
+
 ## Installation
 
 1. `ensure rp-crime-core` doit être chargé **avant** les autres resources
@@ -102,13 +140,22 @@ suffisamment longtemps.
    ajouter. Ce ne sont **pas** des skins visuels d'AK-47/Uzi réels : pour ça,
    voir `server-data/resources/[addons]/README.md` et n'utiliser qu'un pack
    de skins d'armes légitime (jamais un pack "leaké").
+9. `rp-gangwar-events` dépend de `rp-gangs` (liste des territoires) et de
+   `rp-crime-core` (gang du joueur) : les deux doivent démarrer avant
+   (déjà fait dans `server.cfg`). Optionnel : renseigner
+   `setr rp_gangwar_discord_webhook "https://discord.com/api/webhooks/..."`
+   pour recevoir les annonces sur Discord (indépendant du webhook de
+   `rp-welcome`).
+10. `rp-bountyhunter` et `rp-atmrobbery` n'ont pas de schéma SQL à importer
+    (état entièrement en mémoire, remis à zéro au redémarrage du serveur).
 
 ## Personnalisation
 
 Chaque resource a son `shared/config.lua` : emplacements, montants,
 probabilités, cooldowns. Les emplacements par défaut (magasins, casse auto,
-circuit, façade, banques, point de deal, plants) sont des coordonnées de
-départ à ajuster en jeu selon vos préférences.
+circuit, façade, banques, point de deal, plants, distributeurs, zones de
+combat) sont des coordonnées de départ à ajuster en jeu selon vos
+préférences.
 
 ## Idées pour aller plus loin (non implémentées)
 
@@ -121,3 +168,9 @@ départ à ajuster en jeu selon vos préférences.
   propriétaire actuel exposé par `exports['rp-turfwar']:GetTerritoryOwner`.
 - Remplacer le compteur en mémoire de `rp-weedfarm` par un vrai item
   d'inventaire (comme `dirty_cash` pour le blanchiment).
+- `rp-bountyhunter` traite la cible comme un point d'interaction plutôt
+  qu'un PNJ hostile réel (cohérent avec le reste du repo, qui privilégie
+  proximité + `[E]` à la simulation de combat) : on peut y ajouter un vrai
+  ped hostile (`CreatePed` + IA basique) pour plus d'immersion.
+- Faire varier `Config.RepBonusPerTick` de `rp-gangwar-events` selon le
+  palier de réputation du gang propriétaire du territoire.

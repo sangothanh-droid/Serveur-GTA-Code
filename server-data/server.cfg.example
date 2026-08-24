@@ -27,6 +27,11 @@ add_ace group.admin command allow
 add_ace group.admin command.quit allow
 add_principal identifier.license:REPLACE_WITH_ADMIN_LICENSE group.admin
 
+# qb-core doit pouvoir créer ses propres groupes de permissions (qbcore.user,
+# qbcore.admin, ...) au démarrage via add_ace/add_principal - sans cette
+# ligne ces appels échouent avec "Access denied for command add_ace".
+add_ace resource.qb-core command allow
+
 # --- Steam (optionnel mais recommandé pour l'anti-cheat/identité) ---
 set steam_webApiKey "PASTE_YOUR_STEAM_WEB_API_KEY_HERE"
 
@@ -38,6 +43,9 @@ set sv_enableNetworkedSounds 1
 # --- Logs Discord (join/leave, acceptation du règlement) ---
 # URL de type https://discord.com/api/webhooks/xxx/yyy - laisser vide pour désactiver.
 setr rp_welcome_discord_webhook ""
+
+# --- Logs Discord (annonce des points chauds de rp-gangwar-events) ---
+setr rp_gangwar_discord_webhook ""
 
 # --- Ressources système FiveM ---
 ensure mapmanager
@@ -54,13 +62,25 @@ ensure rp-welcome
 
 # --- Base de données (doit démarrer avant tout ce qui en dépend) ---
 ensure oxmysql
-set mysql_connection_string "mysql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}?charset=utf8mb4"
+# FXServer n'interprète PAS les variables ${VAR} dans server.cfg : remplace
+# ces valeurs par le contenu réel de ton .env (DB_USER, DB_PASSWORD, etc.),
+# sinon oxmysql échoue avec "Access denied for user '${DB_USER}'".
+set mysql_connection_string "mysql://PASTE_DB_USER:PASTE_DB_PASSWORD@PASTE_DB_HOST:PASTE_DB_PORT/PASTE_DB_NAME?charset=utf8mb4"
 
 # --- Framework QBCore (doit démarrer avant rp-crime-core et les jobs) ---
 ensure qb-core
 ensure qb-multicharacter
 ensure qb-spawn
+# PolyZone, qb-interior et qb-clothing sont des dépendances de qb-apartments
+# (voir dependencies{} dans son fxmanifest.lua) : sans elles la ressource
+# échoue au démarrage.
+ensure PolyZone
+ensure qb-interior
+ensure qb-clothing
 ensure qb-apartments
+# qb-weapons est une dépendance dure de qb-inventory (dependency 'qb-weapons'
+# dans son fxmanifest.lua).
+ensure qb-weapons
 ensure qb-inventory
 ensure qb-menu
 ensure qb-input
@@ -83,6 +103,8 @@ ensure rp-heist
 ensure rp-armstrafficking
 ensure rp-turfwar
 ensure rp-weedfarm
+ensure rp-atmrobbery
+ensure rp-bountyhunter
 
 # --- Labos (armes/drogue) et guerre pour leur monopole ---
 # rp-labwars doit démarrer après rp-weaponlab et rp-druglab (il lit leurs
@@ -90,6 +112,11 @@ ensure rp-weedfarm
 ensure rp-weaponlab
 ensure rp-druglab
 ensure rp-labwars
+
+# --- Événements de gang (nécessite rp-gangs et rp-crime-core) ---
+# Toutes les Config.IntervalMs heures, annonce un "point chaud" temporaire
+# sur un territoire aléatoire (voir docs/CRIME-JOBS.md).
+ensure rp-gangwar-events
 
 # --- Jobs légaux (voir docs/LEGAL-JOBS.md) ---
 ensure rp-job-core
@@ -103,6 +130,11 @@ ensure rp-lumberjack
 ensure rp-fisherman
 ensure rp-postal
 ensure rp-busker
+ensure rp-carwash
+
+# --- Divertissement / social (ouverts à tous, sans lien gang/job) ---
+ensure rp-casino
+ensure rp-carmeet
 
 # --- Contenus additionnels (véhicules/armes/maps) ---
 # Décommenter et adapter après avoir rempli un template dans
@@ -112,7 +144,10 @@ ensure rp-busker
 # ensure addon-my-map
 
 # --- Carte / gameplay de base ---
-ensure fivem-map-hipster
+# "fivem-map-hipster" ne correspond à aucun dépôt public existant (placeholder
+# hérité d'un exemple de server.cfg) : laissé commenté pour éviter un
+# "Couldn't find resource". La carte GTA V par défaut est utilisée à la place.
+# ensure fivem-map-hipster
 set gametype "Roleplay"
 set mapname "san andreas"
 

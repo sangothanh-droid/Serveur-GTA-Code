@@ -1,6 +1,6 @@
 # Jobs légaux
 
-Dix jobs légaux, tous indépendants les uns des autres. Ils reposent sur
+Onze jobs légaux, tous indépendants les uns des autres. Ils reposent sur
 **`rp-job-core`** (helpers partagés : métier du joueur, paiement) plutôt que
 sur `rp-crime-core` (qui reste réservé aux activités criminelles).
 
@@ -16,6 +16,7 @@ sur `rp-crime-core` (qui reste réservé aux activités criminelles).
 | `rp-fisherman` | Ouvert à tous | `[E]` sur 4 coins de pêche, vendre au marché de Del Perro | $45 / poisson |
 | `rp-postal` | Ouvert à tous | `[E]` au bureau de poste : tournée de 5 boîtes aux lettres | $80 / arrêt (400 la tournée) |
 | `rp-busker` | Ouvert à tous, sans déplacement | `/perform` (animation musicien, 10s) | $20–80 (x2 si généreux) |
+| `rp-carwash` | Ouvert à tous | `[E]` sur un véhicule sale, à l'une des 2 stations-service | $40–90 |
 
 ## Installation
 
@@ -26,17 +27,34 @@ sur `rp-crime-core` (qui reste réservé aux activités criminelles).
    de recrutement. Le joueur doit être **en service** (`/duty`) pour être
    payé.
 2. `rp-taxi`, `rp-delivery`, `rp-garbage`, `rp-lumberjack`, `rp-fisherman`,
-   `rp-postal` et `rp-busker` ne nécessitent aucun métier : accessibles à
-   tout citoyen, comme des petits boulots.
+   `rp-postal`, `rp-busker` et `rp-carwash` ne nécessitent aucun métier :
+   accessibles à tout citoyen, comme des petits boulots.
 3. Aucune de ces resources ne dépend de `rp-gangs` — elles fonctionnent même
    sur un serveur sans les gangs/activités criminelles.
+4. `rp-carwash` vérifie la saleté du véhicule (`GetVehicleDirtLevel`) : il
+   faut qu'il soit visiblement sale (`Config.MinDirtLevel`) pour pouvoir le
+   laver, sinon le jeu le remet à 0 immédiatement sans intérêt.
+
+## Divertissement / social
+
+Deux resources ouvertes à tous, sans lien avec un métier ou un gang :
+
+| Resource | Interaction | Notes |
+|---|---|---|
+| `rp-casino` | `[E]` (visuel) puis `/casino <montant>` près de la table de jeu (Diamond Casino) | Mise entre `Config.MinBet` et `Config.MaxBet` ; 45% de chance de gagner x1.8 (avantage maison volontaire pour ne pas casser l'économie) |
+| `rp-carmeet` | `/startmeet` | Prévient tous les joueurs dans un rayon de 300m (blip + marqueur au sol pendant 15 min) ; cooldown de 5 min par organisateur, aucun argent en jeu |
+
+`rp-casino` retire/ajoute l'argent directement via QBCore (`Player.Functions.RemoveMoney`/`AddMoney`)
+plutôt que via `rp-job-core`/`rp-crime-core`, puisqu'il n'est lié ni à un
+métier ni à un gang.
 
 ## Personnalisation
 
 Chaque resource a son `shared/config.lua` : emplacements, montants, délais.
 Les coordonnées par défaut sont des points de départ à ajuster selon votre
 carte et vos préférences (garage, entrepôt, poubelles, forêt, coins de
-pêche, tournée postale, sites de patrouille/visite).
+pêche, tournée postale, sites de patrouille/visite, stations-service,
+table de jeu).
 
 ## Idées pour aller plus loin (non implémentées)
 
