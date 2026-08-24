@@ -50,6 +50,9 @@ setr rp_gangwar_discord_webhook ""
 # --- Écran de chargement personnalisé ---
 ensure rp-loadingscreen
 
+# --- Scoreboard (maintenir TAB) ---
+ensure rp-scoreboard
+
 # --- Ressources système FiveM ---
 ensure mapmanager
 ensure chat

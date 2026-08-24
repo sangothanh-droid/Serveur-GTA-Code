@@ -14,6 +14,7 @@ framework [QBCore](https://github.com/qbcore-framework).
 | `.env.example`               | Modèle des variables d'environnement (à copier en `.env`)   |
 | `setup.sh`                   | Télécharge FXServer et clone les ressources QBCore           |
 | `server-data/resources/[local]/rp-loadingscreen` | Écran de chargement personnalisé (NUI HTML/CSS/JS pur, sans asset binaire) |
+| `server-data/resources/[local]/rp-scoreboard` | Scoreboard NUI : liste des joueurs connectés (nom, ID, ping) en maintenant TAB |
 | `server-data/resources/[local]/rp-queue`    | File d'attente FIFO (avec priorité staff) quand le serveur est plein |
 | `server-data/resources/[local]/rp-welcome`  | Écran de règlement à l'arrivée + logs Discord (join/leave)   |
 | `server-data/resources/[local]/rp-gangs`    | Réputation de gang avec conséquences (police, économie)      |
