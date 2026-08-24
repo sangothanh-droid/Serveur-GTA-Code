@@ -21,13 +21,15 @@ local function AddMoney(src, amount, account)
     Player.Functions.AddMoney(account or 'cash', amount)
 end
 
---- Diffuse une alerte aux joueurs ayant le job "police" (compatible qb-policejob).
+--- Diffuse une alerte aux policiers en service (blip temporaire + message
+-- dans le chat, voir rp-police et rp-crime-core/client/main.lua).
 local function AlertPolice(coords, message)
     local players = QBCore.Functions.GetPlayers()
     for _, playerId in ipairs(players) do
         local Player = QBCore.Functions.GetPlayer(playerId)
-        if Player and Player.PlayerData.job.name == 'police' then
+        if Player and Player.PlayerData.job.name == 'police' and Player.PlayerData.job.onduty then
             TriggerClientEvent('rp-crime-core:client:policeAlert', playerId, coords, message)
+            TriggerClientEvent('chat:addMessage', playerId, { args = { '^1[ALERTE]', message } })
         end
     end
 end

@@ -1,0 +1,22 @@
+RegisterCommand(Config.CommandName, function()
+    TriggerServerEvent('rp-nightclub:server:start')
+end, false)
+
+RegisterNetEvent('rp-nightclub:client:ambianceStarted', function()
+    PlaySoundFrontend(-1, 'Menu_Accept', 'Phone_SoundSet_Default', true)
+    TriggerEvent('QBCore:Notify', "L'ambiance est lancée, profitez-en !", 'primary')
+end)
+
+CreateThread(function()
+    local blip = AddBlipForRadius(Config.Club.coords.x, Config.Club.coords.y, Config.Club.coords.z, Config.Club.radius)
+    SetBlipColour(blip, 27)
+    SetBlipAlpha(blip, 60)
+
+    local marker = AddBlipForCoord(Config.Club.coords.x, Config.Club.coords.y, Config.Club.coords.z)
+    SetBlipSprite(marker, 122)
+    SetBlipColour(marker, 27)
+    SetBlipAsShortRange(marker, true)
+    BeginTextCommandSetBlipName('STRING')
+    AddTextComponentSubstringPlayerName(Config.Club.label)
+    EndTextCommandSetBlipName(marker)
+end)

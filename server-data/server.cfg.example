@@ -132,6 +132,18 @@ ensure rp-postal
 ensure rp-busker
 ensure rp-carwash
 
+# --- Services publics (métiers assignés, nécessitent rp-job-core) ---
+# rp-police et rp-ambulance utilisent les jobs 'police'/'ambulance' déjà
+# fournis par défaut dans qb-core. rp-firefighter, rp-restaurant et
+# rp-nightclub nécessitent d'ajouter leurs jobs (fire/burgershot/dj) via
+# docs/qb-core-jobs-snippet.lua. Voir docs/LEGAL-JOBS.md.
+ensure rp-police
+ensure rp-ambulance
+ensure rp-firefighter
+ensure rp-restaurant
+ensure rp-barber
+ensure rp-nightclub
+
 # --- Divertissement / social (ouverts à tous, sans lien gang/job) ---
 ensure rp-casino
 ensure rp-carmeet

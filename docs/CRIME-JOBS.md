@@ -148,6 +148,12 @@ rapide à répéter.
    `rp-welcome`).
 10. `rp-bountyhunter` et `rp-atmrobbery` n'ont pas de schéma SQL à importer
     (état entièrement en mémoire, remis à zéro au redémarrage du serveur).
+11. `rp-crime-core:AlertPolice` cible désormais les policiers **en
+    service** uniquement (auparavant : n'importe quel joueur avec le job
+    "police", même hors service), et envoie en plus un message dans le
+    chat en plus du blip temporaire existant — voir `rp-police` dans
+    `docs/LEGAL-JOBS.md`. La signature de l'export n'a pas changé, aucune
+    des resources listées ci-dessus n'a besoin d'être modifiée.
 
 ## Personnalisation
 

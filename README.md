@@ -20,7 +20,7 @@ framework [QBCore](https://github.com/qbcore-framework).
 | `server-data/resources/[local]/rp-shoprobbery`, `rp-carjack`, `rp-drugdealing`, `rp-illegalrace`, `rp-laundering`, `rp-heist`, `rp-armstrafficking`, `rp-turfwar`, `rp-weedfarm`, `rp-weaponlab`, `rp-druglab`, `rp-atmrobbery`, `rp-bountyhunter` | 13 activités criminelles jouables, voir `docs/CRIME-JOBS.md` |
 | `server-data/resources/[local]/rp-labwars`  | Guerre de monopole sur les labos d'armes/drogue (contrôle de territoire) |
 | `server-data/resources/[local]/rp-gangwar-events` | Point chaud périodique (toutes les 3h) sur un territoire de gang aléatoire, annoncé chat + Discord |
-| `server-data/resources/[local]/rp-job-core`, `rp-mechanic`, `rp-security`, `rp-realestate`, `rp-taxi`, `rp-delivery`, `rp-garbage`, `rp-lumberjack`, `rp-fisherman`, `rp-postal`, `rp-busker`, `rp-carwash` | 11 jobs légaux jouables, voir `docs/LEGAL-JOBS.md` |
+| `server-data/resources/[local]/rp-job-core`, `rp-mechanic`, `rp-security`, `rp-realestate`, `rp-taxi`, `rp-delivery`, `rp-garbage`, `rp-lumberjack`, `rp-fisherman`, `rp-postal`, `rp-busker`, `rp-carwash`, `rp-police`, `rp-ambulance`, `rp-firefighter`, `rp-restaurant`, `rp-barber`, `rp-nightclub` | 17 jobs légaux jouables, voir `docs/LEGAL-JOBS.md` |
 | `server-data/resources/[local]/rp-casino`, `rp-carmeet` | Divertissement/social ouverts à tous (mini-jeu de mise, rassemblement voitures), voir `docs/LEGAL-JOBS.md` |
 | `server-data/resources/[addons]/`           | Templates pour véhicules/armes/maps additionnels (assets à fournir) |
 | `deploy/install-service.sh` | Installe le serveur comme service systemd (auto-restart)     |
