@@ -166,6 +166,9 @@ ensure rp-carmeet
 ensure rp-lasergame
 ensure rp-arcade
 
+# --- Téléphone minimaliste (F1 ou /phone, nécessite qb-core) ---
+ensure rp-phone
+
 # --- Contenus additionnels (véhicules/armes/maps) ---
 # Décommenter et adapter après avoir rempli un template dans
 # server-data/resources/[addons]/ (voir le README de ce dossier).

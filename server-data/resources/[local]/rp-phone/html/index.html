@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Téléphone</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="phone" class="phone hidden">
+        <div class="phone-screen">
+            <header class="phone-header">
+                <span class="phone-brand">MirageRP</span>
+                <button id="close-btn" class="close-btn" title="Fermer (Échap)">&times;</button>
+            </header>
+
+            <nav class="tabs">
+                <button class="tab-btn active" data-tab="bank">Banque</button>
+                <button class="tab-btn" data-tab="messages">Messages</button>
+                <button class="tab-btn" data-tab="notes">Notes</button>
+            </nav>
+
+            <section id="tab-bank" class="tab-content active">
+                <div class="balance-card">
+                    <span class="balance-label">Liquide</span>
+                    <span id="cash-amount" class="balance-amount">$0</span>
+                </div>
+                <div class="balance-card">
+                    <span class="balance-label">Banque</span>
+                    <span id="bank-amount" class="balance-amount">$0</span>
+                </div>
+                <p class="hint">Lecture seule — mis à jour automatiquement.</p>
+            </section>
+
+            <section id="tab-messages" class="tab-content">
+                <div id="messages-list" class="messages-list"></div>
+                <form id="message-form" class="message-form">
+                    <input id="target-id" class="input input-id" type="number" min="0" placeholder="ID" required>
+                    <input id="message-text" class="input input-text" type="text" maxlength="200" placeholder="Message..." required>
+                    <button type="submit" class="send-btn">Envoyer</button>
+                </form>
+            </section>
+
+            <section id="tab-notes" class="tab-content">
+                <textarea id="notes-area" class="notes-area" placeholder="Écrivez vos notes ici..."></textarea>
+                <p class="hint">Sauvegardé localement sur cet appareil.</p>
+            </section>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

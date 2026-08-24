@@ -1,0 +1,218 @@
+:root {
+    --color-bg: #0d0a1f;
+    --color-panel: #1c1533;
+    --color-header: #2a1b4d;
+    --color-accent: #e8a13c;
+    --color-text: #f4ede1;
+    --color-text-dim: #c9bfae;
+    --color-in: #2a1b4d;
+    --color-out: rgba(232, 161, 60, 0.18);
+    --font-stack: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    font-family: var(--font-stack);
+    color: var(--color-text);
+    overflow: hidden;
+}
+
+.phone {
+    position: fixed;
+    bottom: 4vh;
+    right: 3vw;
+    width: 320px;
+    height: 560px;
+}
+
+.phone.hidden {
+    display: none;
+}
+
+.phone-screen {
+    width: 100%;
+    height: 100%;
+    background: var(--color-bg);
+    border: 4px solid #000;
+    border-radius: 28px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 1vw 3vw rgba(0, 0, 0, 0.6);
+}
+
+.phone-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    background: var(--color-header);
+    border-bottom: 1px solid rgba(232, 161, 60, 0.3);
+}
+
+.phone-brand {
+    font-weight: 700;
+    color: var(--color-accent);
+    letter-spacing: 0.03em;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: var(--color-text-dim);
+    font-size: 1.3rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: var(--color-text);
+}
+
+.tabs {
+    display: flex;
+    border-bottom: 1px solid rgba(244, 237, 225, 0.1);
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 10px;
+    background: none;
+    border: none;
+    color: var(--color-text-dim);
+    font-size: 0.8rem;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+}
+
+.tab-btn.active {
+    color: var(--color-accent);
+    border-bottom-color: var(--color-accent);
+}
+
+.tab-content {
+    display: none;
+    flex: 1;
+    flex-direction: column;
+    padding: 16px;
+    overflow-y: auto;
+    gap: 10px;
+}
+
+.tab-content.active {
+    display: flex;
+}
+
+.balance-card {
+    background: var(--color-panel);
+    border-radius: 10px;
+    padding: 14px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.balance-label {
+    color: var(--color-text-dim);
+    font-size: 0.85rem;
+}
+
+.balance-amount {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-accent);
+}
+
+.hint {
+    color: var(--color-text-dim);
+    font-size: 0.7rem;
+    text-align: center;
+    margin-top: auto;
+}
+
+.messages-list {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.message-bubble {
+    max-width: 85%;
+    padding: 8px 12px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    word-wrap: break-word;
+}
+
+.message-bubble.in {
+    align-self: flex-start;
+    background: var(--color-in);
+}
+
+.message-bubble.out {
+    align-self: flex-end;
+    background: var(--color-out);
+}
+
+.message-meta {
+    display: block;
+    font-size: 0.65rem;
+    color: var(--color-text-dim);
+    margin-bottom: 2px;
+}
+
+.message-form {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.input {
+    background: var(--color-panel);
+    border: 1px solid rgba(244, 237, 225, 0.15);
+    border-radius: 8px;
+    color: var(--color-text);
+    padding: 8px 10px;
+    font-size: 0.8rem;
+}
+
+.input-id {
+    width: 55px;
+}
+
+.input-text {
+    flex: 1;
+}
+
+.send-btn {
+    background: var(--color-accent);
+    border: none;
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: #1c1533;
+    font-weight: 700;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.notes-area {
+    flex: 1;
+    resize: none;
+    background: var(--color-panel);
+    border: 1px solid rgba(244, 237, 225, 0.15);
+    border-radius: 8px;
+    color: var(--color-text);
+    padding: 10px;
+    font-family: var(--font-stack);
+    font-size: 0.85rem;
+}
