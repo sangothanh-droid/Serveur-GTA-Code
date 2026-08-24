@@ -33,6 +33,7 @@ framework [QBCore](https://github.com/qbcore-framework).
 | `docs/INSTALL.md`            | Guide d'installation pas à pas                                |
 | `docs/SOLO-CRIME.md`         | Petites frappes solo hors gangs officiels (réputation de rue) |
 | `docs/ACTIVITIES.md`         | Loisirs et casino étendu (mini-jeux, laser game, arcade)      |
+| `docs/HUD-THEME.md`          | Code couleur cohérent des blips sur la carte                  |
 
 ## Démarrage rapide
 

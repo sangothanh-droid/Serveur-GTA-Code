@@ -142,3 +142,15 @@ CreateThread(function()
         Wait(sleep)
     end
 end)
+
+-- Voir docs/HUD-THEME.md : blanc (0) réservé à l'ambulance (le sprite
+-- "Hospital" est déjà une croix rouge sur fond blanc).
+CreateThread(function()
+    local blip = AddBlipForCoord(Config.Hospital.coords.x, Config.Hospital.coords.y, Config.Hospital.coords.z)
+    SetBlipSprite(blip, 61)
+    SetBlipColour(blip, 0)
+    SetBlipAsShortRange(blip, true)
+    BeginTextCommandSetBlipName('STRING')
+    AddTextComponentSubstringPlayerName(Config.Hospital.label)
+    EndTextCommandSetBlipName(blip)
+end)

@@ -2,6 +2,7 @@ local QBCore = exports['qb-core']:GetCoreObject()
 
 local activeFire = nil -- { coords, label }
 local fireProp = nil
+local fireBlip = nil
 local isExtinguishing = false
 
 local function DrawText3D(coords, text)
@@ -27,6 +28,15 @@ RegisterNetEvent('rp-firefighter:client:setFire', function(coords, label)
     fireProp = CreateObject(hash, coords.x, coords.y, coords.z - 1.0, false, false, false)
     SetModelAsNoLongerNeeded(hash)
 
+    -- Voir docs/HUD-THEME.md : orange (17) réservé aux pompiers.
+    fireBlip = AddBlipForCoord(coords.x, coords.y, coords.z)
+    SetBlipSprite(fireBlip, 436)
+    SetBlipColour(fireBlip, 17)
+    SetBlipAsShortRange(fireBlip, false)
+    BeginTextCommandSetBlipName('STRING')
+    AddTextComponentSubstringPlayerName('Incendie - ' .. label)
+    EndTextCommandSetBlipName(fireBlip)
+
     TriggerEvent('chat:addMessage', { args = { '^1[INCENDIE]', ('Un incendie s\'est déclaré : %s'):format(label) } })
 end)
 
@@ -36,6 +46,11 @@ RegisterNetEvent('rp-firefighter:client:clearFire', function()
         DeleteEntity(fireProp)
     end
     fireProp = nil
+
+    if fireBlip then
+        RemoveBlip(fireBlip)
+        fireBlip = nil
+    end
 end)
 
 RegisterNetEvent('rp-firefighter:client:startExtinguish', function(duration)

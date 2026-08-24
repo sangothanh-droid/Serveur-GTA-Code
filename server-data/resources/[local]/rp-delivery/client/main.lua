@@ -18,7 +18,7 @@ RegisterNetEvent('rp-delivery:client:startDelivery', function(destination, label
 
     activeDropBlip = AddBlipForCoord(destination.x, destination.y, destination.z)
     SetBlipSprite(activeDropBlip, 1)
-    SetBlipColour(activeDropBlip, 5)
+    SetBlipColour(activeDropBlip, 3) -- bleu : jobs légaux (voir docs/HUD-THEME.md)
     BeginTextCommandSetBlipName('STRING')
     AddTextComponentSubstringPlayerName('Livraison : ' .. label)
     EndTextCommandSetBlipName(activeDropBlip)

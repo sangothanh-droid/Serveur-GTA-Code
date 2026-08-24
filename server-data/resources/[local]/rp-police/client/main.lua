@@ -183,3 +183,14 @@ RegisterNetEvent('rp-police:client:spawnVehicle', function(model, coords, headin
     SetPedIntoVehicle(PlayerPedId(), veh, -1)
     SetModelAsNoLongerNeeded(hash)
 end)
+
+-- Voir docs/HUD-THEME.md : bleu foncé (29) réservé à la police.
+CreateThread(function()
+    local blip = AddBlipForCoord(Config.Station.coords.x, Config.Station.coords.y, Config.Station.coords.z)
+    SetBlipSprite(blip, 60)
+    SetBlipColour(blip, 29)
+    SetBlipAsShortRange(blip, true)
+    BeginTextCommandSetBlipName('STRING')
+    AddTextComponentSubstringPlayerName(Config.Station.label)
+    EndTextCommandSetBlipName(blip)
+end)

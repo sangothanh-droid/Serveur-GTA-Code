@@ -10,7 +10,7 @@ RegisterNetEvent('rp-taxi:client:startFare', function(destination, label)
 
     activeFareBlip = AddBlipForCoord(destination.x, destination.y, destination.z)
     SetBlipSprite(activeFareBlip, 1)
-    SetBlipColour(activeFareBlip, 5)
+    SetBlipColour(activeFareBlip, 3) -- bleu : jobs légaux (voir docs/HUD-THEME.md)
     BeginTextCommandSetBlipName('STRING')
     AddTextComponentSubstringPlayerName('Client : ' .. label)
     EndTextCommandSetBlipName(activeFareBlip)

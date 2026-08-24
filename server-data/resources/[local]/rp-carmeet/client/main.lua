@@ -13,7 +13,7 @@ RegisterNetEvent('rp-carmeet:client:showMeet', function(coords, label, organizer
     end
     activeBlip = AddBlipForCoord(coords.x, coords.y, coords.z)
     SetBlipSprite(activeBlip, 225)
-    SetBlipColour(activeBlip, 5)
+    SetBlipColour(activeBlip, 46) -- or : loisirs (voir docs/HUD-THEME.md)
     BeginTextCommandSetBlipName('STRING')
     AddTextComponentSubstringPlayerName(label)
     EndTextCommandSetBlipName(activeBlip)
