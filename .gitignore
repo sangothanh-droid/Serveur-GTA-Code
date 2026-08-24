@@ -8,6 +8,10 @@ run.sh
 # une classe de caractères glob)
 server-data/resources/\[qb\]/
 server-data/resources/\[standalone\]/oxmysql/
+server-data/resources/\[system\]/
+
+# Historique de la console FXServer
+server-data/.replxx_history
 
 # Assets binaires des addons (véhicules/armes/maps) : à gérer séparément
 # (poids, licence), pas dans ce repo Git.
