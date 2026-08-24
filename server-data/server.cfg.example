@@ -118,6 +118,16 @@ ensure rp-labwars
 # sur un territoire aléatoire (voir docs/CRIME-JOBS.md).
 ensure rp-gangwar-events
 
+# --- Petites frappes solo, hors gangs officiels (voir docs/SOLO-CRIME.md) ---
+# rp-streetrep doit démarrer avant les 3 autres (elles appellent
+# exports['rp-streetrep']:AddStreetRep). Réservé aux joueurs sans gang
+# (rp-crime-core:GetPlayerGang doit renvoyer nil), en parallèle du système
+# de gangs qui reste inchangé.
+ensure rp-streetrep
+ensure rp-pettycrime
+ensure rp-soloburglary
+ensure rp-lonewolfcarjack
+
 # --- Jobs légaux (voir docs/LEGAL-JOBS.md) ---
 ensure rp-job-core
 ensure rp-mechanic
