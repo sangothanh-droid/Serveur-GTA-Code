@@ -37,21 +37,15 @@ RegisterNetEvent('rp-police:server:search', function(targetId)
         return
     end
 
-    local lines = { ('-- Inventaire de %s --'):format(GetPlayerName(targetId)) }
-    local empty = true
+    local items = {}
     for _, item in pairs(TargetPlayer.PlayerData.items or {}) do
         if item then
-            empty = false
-            table.insert(lines, ('%s x%d'):format(item.label, item.amount))
+            table.insert(items, ('%s x%d'):format(item.label, item.amount))
         end
     end
-    if empty then
-        table.insert(lines, '(vide)')
-    end
 
-    for _, line in ipairs(lines) do
-        TriggerClientEvent('chat:addMessage', src, { args = { '^3[FOUILLE]', line } })
-    end
+    TriggerClientEvent('QBCore:Notify', src, ('Inventaire de %s : %s'):format(
+        GetPlayerName(targetId), #items > 0 and table.concat(items, ', ') or '(vide)'), 'primary')
 end)
 
 RegisterNetEvent('rp-police:server:ticket', function(targetId, amount, reason)
@@ -81,6 +75,11 @@ RegisterNetEvent('rp-police:server:ticket', function(targetId, amount, reason)
     Target.Functions.RemoveMoney('bank', amount, 'police-ticket')
     Officer.Functions.AddMoney('bank', amount, 'police-ticket')
 
+    TriggerClientEvent('QBCore:Notify', src, ('Amende infligée : +$%d'):format(amount), 'success')
+    TriggerClientEvent('QBCore:Notify', targetId, ('Vous recevez une amende de $%d (%s)'):format(amount, reason), 'error')
+
+    -- Log public de l'infraction (comme un rapport de police diffusé), en
+    -- plus des notifications personnelles ci-dessus.
     local message = ('%s verbalise %s : $%d (%s)'):format(
         GetPlayerName(src), GetPlayerName(targetId), amount, reason)
     TriggerClientEvent('chat:addMessage', -1, { args = { '^3[POLICE]', message } })

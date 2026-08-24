@@ -72,6 +72,6 @@ end)
 RegisterNetEvent('rp-streetrep:server:checkRep', function()
     local src = source
     GetStreetRep(src, function(points)
-        TriggerClientEvent('chat:addMessage', src, { args = { '^3[RÉPUTATION]', ('Réputation de rue : %d'):format(points) } })
+        TriggerClientEvent('QBCore:Notify', src, ('Réputation de rue : %d'):format(points), 'primary')
     end)
 end)

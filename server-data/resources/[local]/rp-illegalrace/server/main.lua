@@ -72,6 +72,7 @@ RegisterNetEvent('rp-illegalrace:server:checkpoint', function(nextIndex)
             exports['rp-gangs']:AddReputation(gang, Config.RepGain, src)
         end
 
+        TriggerClientEvent('QBCore:Notify', src, ('Vous remportez la course : +$%d'):format(reward), 'success')
         TriggerClientEvent('chat:addMessage', -1, {
             args = { '^3[COURSE]', ('%s remporte la course ! (+$%d)'):format(GetPlayerName(src), reward) }
         })

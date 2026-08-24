@@ -54,6 +54,8 @@ local function applyConsequences(gangName, oldTierIndex, newTierIndex, src)
     if src then
         local stars = math.min(5, newTierIndex)
         TriggerClientEvent('rp-gangs:client:setWanted', src, stars)
+        TriggerClientEvent('QBCore:Notify', src,
+            ('Votre gang est maintenant surveillé de plus près (%s).'):format(tier.label), 'error')
     end
 end
 

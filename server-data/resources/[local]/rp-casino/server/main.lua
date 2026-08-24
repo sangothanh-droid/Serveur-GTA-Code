@@ -165,15 +165,13 @@ RegisterNetEvent('rp-casino:server:blackjackStart', function(rawAmount)
     }
     blackjackHands[src] = hand
 
-    TriggerClientEvent('chat:addMessage', src, {
-        args = { '^3[BLACKJACK]', ('Votre main : %s | Carte visible du croupier : %d'):format(
-            describeHand(hand.playerCards), hand.dealerCards[1]) }
-    })
+    TriggerClientEvent('QBCore:Notify', src, ('Votre main : %s | Carte visible du croupier : %d'):format(
+        describeHand(hand.playerCards), hand.dealerCards[1]), 'primary')
 
     if handValue(hand.playerCards) == 21 then
-        TriggerClientEvent('chat:addMessage', src, { args = { '^3[BLACKJACK]', 'Blackjack ! Faites /bjstand pour encaisser.' } })
+        TriggerClientEvent('QBCore:Notify', src, 'Blackjack ! Faites /bjstand pour encaisser.', 'success')
     else
-        TriggerClientEvent('chat:addMessage', src, { args = { '^3[BLACKJACK]', 'Faites /bjhit pour tirer, ou /bjstand pour rester.' } })
+        TriggerClientEvent('QBCore:Notify', src, 'Faites /bjhit pour tirer, ou /bjstand pour rester.', 'primary')
     end
 end)
 
@@ -192,8 +190,8 @@ local function resolveBlackjack(src, playerBusted)
     local playerTotal = handValue(hand.playerCards)
 
     if playerBusted then
-        TriggerClientEvent('chat:addMessage', src,
-            { args = { '^3[BLACKJACK]', ('Vous dépassez 21 (%d) : mise de $%d perdue.'):format(playerTotal, hand.bet) } })
+        TriggerClientEvent('QBCore:Notify', src,
+            ('Vous dépassez 21 (%d) : mise de $%d perdue.'):format(playerTotal, hand.bet), 'error')
         return
     end
 
@@ -203,9 +201,8 @@ local function resolveBlackjack(src, playerBusted)
     end
     local dealerTotal = handValue(hand.dealerCards)
 
-    TriggerClientEvent('chat:addMessage', src, {
-        args = { '^3[BLACKJACK]', ('Main du croupier : %s'):format(describeHand(hand.dealerCards)) }
-    })
+    TriggerClientEvent('QBCore:Notify', src,
+        ('Main du croupier : %s'):format(describeHand(hand.dealerCards)), 'primary')
 
     if dealerTotal > 21 or playerTotal > dealerTotal then
         local payout = hand.bet * 2
@@ -229,7 +226,7 @@ RegisterNetEvent('rp-casino:server:blackjackHit', function()
 
     table.insert(hand.playerCards, drawCard())
     local total = handValue(hand.playerCards)
-    TriggerClientEvent('chat:addMessage', src, { args = { '^3[BLACKJACK]', ('Votre main : %s'):format(describeHand(hand.playerCards)) } })
+    TriggerClientEvent('QBCore:Notify', src, ('Votre main : %s'):format(describeHand(hand.playerCards)), 'primary')
 
     if total > 21 then
         resolveBlackjack(src, true)
