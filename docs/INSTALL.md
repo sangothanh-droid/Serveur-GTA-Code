@@ -38,11 +38,17 @@
    il contiendra ta licence FiveM et ton identifiant admin — ne jamais le
    commiter, surtout sur un repo public.
 
-5. **Importer le schéma SQL de QBCore**
-   Le fichier SQL se trouve dans `server-data/resources/[qb]/qb-core/qb-core.sql`
-   (ou `qbcore.sql` selon la version). L'importer dans la base créée à l'étape 3 :
+5. **Importer les schémas SQL**
+   Le fichier SQL de QBCore se trouve dans `server-data/resources/[qb]/qb-core/`
+   (`qb-core.sql` ou `qbcore.sql` selon la version). L'image `mariadb:11` fournit
+   le client sous le nom `mariadb` (pas `mysql`). Importer chaque fichier dans la
+   base créée à l'étape 3 (mets des guillemets autour du chemin à cause des
+   crochets) :
    ```bash
-   docker exec -i gta-rp-db mysql -u qbcore -p qbcore < server-data/resources/[qb]/qb-core/qb-core.sql
+   docker exec -i gta-rp-db mariadb -u qbcore -p qbcore < 'server-data/resources/[qb]/qb-core/qbcore.sql'
+   docker exec -i gta-rp-db mariadb -u qbcore -p qbcore < 'server-data/resources/[local]/rp-gangs/sql/gang_reputation.sql'
+   docker exec -i gta-rp-db mariadb -u qbcore -p qbcore < 'server-data/resources/[local]/rp-turfwar/sql/gang_territories.sql'
+   docker exec -i gta-rp-db mariadb -u qbcore -p qbcore < 'server-data/resources/[local]/rp-labwars/sql/lab_control.sql'
    ```
 
 6. **Finaliser server.cfg**
